@@ -5,8 +5,14 @@
     "homePage": {
         "title": "Home Page"
     },
+    "loginPage": {
+        "title": "Log In"
+    },
     "masterPage": {
         "title": "Master Page"
+    },
+    "notFoundPage": {
+        "title": "404 Page not found!"
     },
     "settingsPage": {
         "title": "Settings Page"

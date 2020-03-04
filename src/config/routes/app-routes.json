@@ -1,23 +1,26 @@
 [
     {
+        "component": "NotFoundPageContainer",
+        "name": "404",
+        "permission": "none",
+        "url": "/404"
+    },
+    {
         "component": "HomePageContainer",
         "name": "home",
-        "permission": null,
-        "requiresLogout": false,
+        "permission": "Content.HomePage",
         "url": "/"
     },
     {
-        "component": "ShopPageContainer",
-        "name": "shop",
-        "permission": null,
-        "requiresLogout": false,
-        "url": "/shop"
+        "component": "LoginPageContainer",
+        "name": "login",
+        "permission": "none",
+        "url": "/login"
     },
     {
         "component": "SettingsPageContainer",
         "name": "settings",
-        "permission": null,
-        "requiresLogout": false,
+        "permission": "Content.SettingsPage",
         "url": "/settings"
     }
 ]

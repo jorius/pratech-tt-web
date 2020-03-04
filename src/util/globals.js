@@ -14,7 +14,7 @@ export const decodeBase64String = (str) =>
 export const encodeBase64String = (str) =>
     window.btoa(str);
 
-    /**
+/**
  * Returns the base URL of the current site.
  * @returns {string}
  */

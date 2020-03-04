@@ -5,8 +5,14 @@
     "homePage": {
         "title": "Página de Inicio"
     },
+    "loginPage": {
+        "title": "Inicio de sesión"
+    },
     "masterPage": {
         "title": "Página maestra"
+    },
+    "notFoundPage": {
+        "title": "404 Página no encontrada!"
     },
     "settingsPage": {
         "title": "Configuración"

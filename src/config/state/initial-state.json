@@ -3,6 +3,8 @@
         "version": "1.0.0"
     },
     "user": {
-        "languageCode": "es"
+        "isLoggedIn": false,
+        "languageCode": "es",
+        "permissions": []
     }
 }

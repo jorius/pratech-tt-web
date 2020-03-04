@@ -12,15 +12,20 @@ import { theme } from '../../styles/material-ui';
 import styles from './styles';
 
 const MasterPage = ({
+    currentUrl,
     classes,
-    title
+    title,
+    userProps
 }) => (
     <MuiThemeProvider theme={theme}>
         <div className={classes.masterPageContainer}>
             <Helmet>
                 <title>{title}</title>
             </Helmet>
-            <CtrlRoutes />
+            <CtrlRoutes
+                currentUrl={currentUrl}
+                userProps={userProps}
+            />
         </div>
     </MuiThemeProvider>
 );
@@ -28,7 +33,12 @@ const MasterPage = ({
 
 MasterPage.propTypes = {
     classes: PropTypes.object.isRequired,
-    title: PropTypes.string.isRequired
+    currentUrl: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    userProps: PropTypes.shape({
+        isLoggedIn: PropTypes.bool.isRequired,
+        permissions: PropTypes.arrayOf(PropTypes.string).isRequired
+    }).isRequired
 };
 
 export default withStyles(styles)(MasterPage);

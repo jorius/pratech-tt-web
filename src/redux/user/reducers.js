@@ -6,6 +6,18 @@ import { CHANGE_USER_LANG_CODE } from './actions';
 import { config } from '../../config';
 
 /**
+ * @returns {boolean}
+ */
+const isLoggedInReducer = (
+    state = config.initialState.user.isLoggedIn, action
+) => {
+    switch (action.type) {
+        default:
+            return state;
+    }
+};
+
+/**
  * @returns {string}
  */
 const languageCodeReducer = (
@@ -19,6 +31,20 @@ const languageCodeReducer = (
     }
 };
 
+/**
+ * @returns {object[]}
+ */
+const permissionsReducer = (
+    state = config.initialState.user.permissions, action
+) => {
+    switch (action.type) {
+        default:
+            return state;
+    }
+};
+
 export const userReducer = combineReducers({
-    languageCode: languageCodeReducer
+    isLoggedIn: isLoggedInReducer,
+    languageCode: languageCodeReducer,
+    permissions: permissionsReducer
 });

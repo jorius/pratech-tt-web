@@ -8,25 +8,42 @@ import MasterPage from '../pages/master-page';
 import { config } from '../config';
 
 const MasterPageContainer = ({
-    userLanguageCode
+    location,
+    userIsLoggedIn,
+    userLanguageCode,
+    userPermissions
 }) => {
     config.applyLanguage(userLanguageCode);
 
+    const currentUrl = location.pathname;
+
     return (
         <MasterPage
+            currentUrl={currentUrl}
             title={config.text.app.title}
+            userProps={{
+                isLoggedIn: userIsLoggedIn,
+                permissions: userPermissions
+            }}
         />
     );
 };
 
 MasterPageContainer.propTypes = {
-    userLanguageCode: PropTypes.string.isRequired
+    location: PropTypes.shape({
+        pathname: PropTypes.string.isRequired
+    }).isRequired,
+    userIsLoggedIn: PropTypes.bool.isRequired,
+    userLanguageCode: PropTypes.string.isRequired,
+    userPermissions: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 MasterPageContainer.defaultProps = {};
 
 const mapStateToProps = ({ user }) => ({
-    userLanguageCode: user.languageCode
+    userIsLoggedIn: user.isLoggedIn,
+    userLanguageCode: user.languageCode,
+    userPermissions: user.permissions
 });
 
 export default connect(
