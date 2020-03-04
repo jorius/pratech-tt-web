@@ -1,12 +1,14 @@
 {
     "app": {
-        "title": "Pratech tt-web"
+        "title": "Pratech"
     },
     "homePage": {
         "title": "Home Page"
     },
     "loginPage": {
-        "title": "Log In"
+        "password": "Password",
+        "title": "Log In",
+        "username": "Username"
     },
     "masterPage": {
         "title": "Master Page"

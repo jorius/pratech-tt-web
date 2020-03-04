@@ -44,20 +44,19 @@ const mockSecurityLoginSvc = mockAdapter => {
 
         const commonData = {
             message: success
-                ? null
+                ? constants.notificationType.SUCCESS
                 : constants.notificationType.ERROR,
             messageType: success
-                ? null
+                ? constants.notificationType.SUCCESS
                 : constants.notificationType.ERROR,
             success,
             httpCode
         };
 
-        const resData = success
-            ? { ...commonData, ...config.mockData.securityLoginSvcResponse }
-            : commonData;
-
-        return createHttpResponse({ ...resData });
+        return createHttpResponse({
+            data: config.mockData.securityLoginSvcResponse,
+            ...commonData
+        });
     });
 };
 
@@ -72,7 +71,7 @@ const mockGetShopCategories = mockAdapter => {
             messageType: constants.notificationType.SUCCESS,
             success: true
         }));
-}
+};
 
 const mockGetStoreBrands = mockAdapter => {
     const url = config.services.store.brands;
@@ -85,7 +84,7 @@ const mockGetStoreBrands = mockAdapter => {
             messageType: constants.notificationType.SUCCESS,
             success: true
         }));
-}
+};
 
 export const initializeServiceMocker = () => {
     if (!config.settings.serviceMocker.isEnabled) {

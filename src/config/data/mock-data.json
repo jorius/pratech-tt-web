@@ -3,7 +3,7 @@
         "email": "admin@pratech.com",
         "name": "Pratech Admin",
         "authToken": "91AE2B60-A22E-43BA-B550-5D459A6A5F92",
-        "permissions": ["Pratech.Admin"]
+        "permissions": ["Pratech.Admin", "Content.HomePage"]
     },
     "shopCategories": [{
         "name": "skirts",
