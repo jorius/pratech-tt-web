@@ -1,0 +1,11 @@
+{
+    "auth": {
+        "login": "{root}/api/security/login"
+    },
+    "shop": {
+        "categories": "{root}/api/shop/categories"
+    },
+    "store": {
+        "brands": "{root}/api/store/brands"
+    }
+}

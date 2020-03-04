@@ -1,0 +1,14 @@
+{
+    "app": {
+        "title": "Pratech tt-web"
+    },
+    "homePage": {
+        "title": "Home Page"
+    },
+    "masterPage": {
+        "title": "Master Page"
+    },
+    "settingsPage": {
+        "title": "Settings Page"
+    }
+}

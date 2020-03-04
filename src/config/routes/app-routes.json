@@ -1,0 +1,23 @@
+[
+    {
+        "component": "HomePageContainer",
+        "name": "home",
+        "permission": null,
+        "requiresLogout": false,
+        "url": "/"
+    },
+    {
+        "component": "ShopPageContainer",
+        "name": "shop",
+        "permission": null,
+        "requiresLogout": false,
+        "url": "/shop"
+    },
+    {
+        "component": "SettingsPageContainer",
+        "name": "settings",
+        "permission": null,
+        "requiresLogout": false,
+        "url": "/settings"
+    }
+]

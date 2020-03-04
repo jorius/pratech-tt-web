@@ -1,0 +1,15 @@
+{
+    "reduxLogger": {
+        "isEnabled": true
+    },
+    "serviceMocker": {
+        "delayResponse": 300,
+        "isEnabled": true,
+        "loginEmail": "admin@pratech.com",
+        "loginPassword": "MTIz",
+        "passwordRecoveryCode": "MTIzNDU2"
+    },
+    "services": {
+        "root": "https://api.pratech.com"
+    }
+}
