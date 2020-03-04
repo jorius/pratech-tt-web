@@ -6,7 +6,10 @@
         "title": "Home Page"
     },
     "loginPage": {
+        "error": "Wrong username or password",
         "password": "Password",
+        "required": "Username and password are required",
+        "success": "You will be redirected in a moment",
         "title": "Log In",
         "username": "Username"
     },

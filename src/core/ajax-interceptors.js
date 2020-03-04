@@ -1,6 +1,10 @@
 // @packages
 import axios from 'axios';
+
+// @scripts
 import constants from '../constants';
+import { HTTP_UNAUTHORIZED_CODE } from './service-mocker';
+import { config } from '../config';
 
 /**
  * @param {Object} globalUI
@@ -11,20 +15,23 @@ const addResponseInterceptors = () => {
             const { data } = response;
 
             if (data.messageType === constants.notificationType.SUCCESS) {
-                return data.data;
+                return data;
             }
 
             // TODO: This promise reject is unhandled by the moment
             return Promise.reject(new Error('Empty data'));
         },
         error => {
-            const { response } = error;
-
-            if (response.data.message && response.data.messageType === constants.notificationType.ERROR) {
-                // TODO: Error in the response
+            if (error.response.status === HTTP_UNAUTHORIZED_CODE) {
+                return {
+                    httpCode: HTTP_UNAUTHORIZED_CODE,
+                    message: config.text.loginPage.error,
+                    messageType: constants.notificationType.ERROR,
+                    success: false
+                };
             }
 
-            // TODO: Unkown error!
+            // TODO: "Unkown error!"
             return Promise.reject(error);
         }
     );

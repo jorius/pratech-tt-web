@@ -9,10 +9,10 @@ import { decodeBase64String } from '../util';
 
 // @constants
 const HTTP_SUCCESS_CODE = 200;
-const HTTP_UNAUTHORIZED_CODE = 401;
+export const HTTP_UNAUTHORIZED_CODE = 401;
 
-const getParams = call => {
-    const { params } = JSON.parse(call.data);
+const getParams = (call) => {
+    const params = JSON.parse(call.data);
     return params;
 };
 
@@ -32,11 +32,11 @@ const createHttpResponse = ({
 const mockSecurityLoginSvc = mockAdapter => {
     const url = config.services.auth.login;
 
-    mockAdapter.onPost(url).reply(call => {
-        const { email, password } = getParams(call);
+    mockAdapter.onPost(url).reply((call) => {
+        const { username, password } = getParams(call);
         const { loginEmail, loginPassword } = config.settings.serviceMocker;
 
-        const success = (email === loginEmail) && (password === decodeBase64String(loginPassword));
+        const success = (username === loginEmail) && (password === decodeBase64String(loginPassword));
 
         const httpCode = success
             ? HTTP_SUCCESS_CODE
@@ -45,7 +45,7 @@ const mockSecurityLoginSvc = mockAdapter => {
         const commonData = {
             message: success
                 ? constants.notificationType.SUCCESS
-                : constants.notificationType.ERROR,
+                : config.text.loginPage.error,
             messageType: success
                 ? constants.notificationType.SUCCESS
                 : constants.notificationType.ERROR,
@@ -54,36 +54,12 @@ const mockSecurityLoginSvc = mockAdapter => {
         };
 
         return createHttpResponse({
-            data: config.mockData.securityLoginSvcResponse,
+            data: success
+                ? config.mockData.securityLoginSvcResponse
+                : {},
             ...commonData
         });
     });
-};
-
-const mockGetShopCategories = mockAdapter => {
-    const url = config.services.shop.categories;
-    const { shopCategories } = config.mockData;
-
-    mockAdapter.onGet(url).reply(() =>
-        createHttpResponse({
-            data: shopCategories,
-            message: constants.notificationType.SUCCESS,
-            messageType: constants.notificationType.SUCCESS,
-            success: true
-        }));
-};
-
-const mockGetStoreBrands = mockAdapter => {
-    const url = config.services.store.brands;
-    const { storeBrands } = config.mockData;
-
-    mockAdapter.onGet(url).reply(() =>
-        createHttpResponse({
-            data: storeBrands,
-            message: constants.notificationType.SUCCESS,
-            messageType: constants.notificationType.SUCCESS,
-            success: true
-        }));
 };
 
 export const initializeServiceMocker = () => {
@@ -100,8 +76,6 @@ export const initializeServiceMocker = () => {
     const serviceMocker = {
         replyWithMockData: () => {
             mockAdapter.reset();
-            mockGetShopCategories(mockAdapter);
-            mockGetStoreBrands(mockAdapter);
             mockSecurityLoginSvc(mockAdapter);
         },
         replyWithNetworkError: () => {

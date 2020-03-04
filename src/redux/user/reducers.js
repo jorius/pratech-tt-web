@@ -41,7 +41,7 @@ const permissionsReducer = (
 ) => {
     switch (action.type) {
         case LOGIN:
-            return action.payload.permissions;
+            return action.payload.data.permissions;
         default:
             return state;
     }

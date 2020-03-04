@@ -13,13 +13,20 @@ export const LOGIN = 'LOGIN';
  * @param {string} password
  */
 export const userLogin = (username, password) => dispatch =>
-    axios.post(config.services.auth.login, { username, password })
-        .then(response =>
-            dispatch({
-                type: LOGIN,
-                payload: response
-            }))
-        .catch(error => Promise.reject(error));
+    new Promise((resolve, reject) =>
+        axios.post(config.services.auth.login, { username, password })
+            .then((response) => {
+                if (!response.success) {
+                    reject(response);
+                    return;
+                }
+
+                dispatch({
+                    type: LOGIN,
+                    payload: response
+                });
+                resolve(response);
+            })).catch(error => Promise.reject(error));
 
 /**
  * @param {string} langCode
