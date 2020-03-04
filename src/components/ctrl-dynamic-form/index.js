@@ -1,0 +1,192 @@
+// @packages
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import PropTypes from 'prop-types';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import React, { PureComponent } from 'react';
+import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/styles';
+
+// @styles
+import styles from './styles';
+
+// @constants
+const formTypes = {
+    CHECKBOX: 'checkbox',
+    PASSWORD: 'password',
+    RADIO: 'radio',
+    SELECT: 'select',
+    TEXT: 'text'
+};
+
+class CtrlDynamicForm extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {};
+        this.buildState = this.buildState.bind(this);
+        this.renderForm = this.renderForm.bind(this);
+        this.handleFieldOnChange = this.handleFieldOnChange.bind(this);
+        this.renderFormItem = this.renderFormItem.bind(this);
+    }
+
+    componentDidMount() {
+        this.buildState();
+    }
+
+    buildState() {
+        const { form } = this.props;
+
+        form.forEach(({ name }) => {
+            this.setState({ [name]: '' });
+        });
+    }
+
+    handleFieldOnChange({ target }) {
+        const {
+            name,
+            value
+        } = target;
+
+        this.setState({ [name]: value });
+    }
+
+    renderFormItem({
+        id,
+        label,
+        name,
+        options,
+        selectOptionLabel,
+        type
+    }) {
+        const { classes } = this.props;
+        // eslint-disable-next-line react/destructuring-assignment
+        const value = this.state[name];
+
+        switch (type) {
+            case formTypes.CHECKBOX:
+                return (
+                    <FormControlLabel
+                        control={(
+                            <Checkbox
+                                checked={value}
+                                id={id}
+                                name={name}
+                                onChange={this.handleFieldOnChange}
+                            />
+                        )}
+                        label={label}
+                    />
+                );
+            case formTypes.PASSWORD:
+                return (
+                    <TextField
+                        id={id}
+                        label={label}
+                        name={name}
+                        onChange={this.handleFieldOnChange}
+                        type="password"
+                        value={value}
+                        variant="outlined"
+                    />
+                );
+            case formTypes.RADIO:
+                return (
+                    <RadioGroup
+                        aria-label={label}
+                        name={name}
+                        onChange={this.handleFieldOnChange}
+                        value={value}
+                    >
+                        {
+                            options.map((option) => (
+                                <FormControlLabel
+                                    control={<Radio />}
+                                    id={`${id}-${option.name}`}
+                                    key={`${id}-${option.name}`}
+                                    label={option.label}
+                                    value={option.value}
+                                />
+                            ))
+                        }
+                    </RadioGroup>
+                );
+            case formTypes.SELECT:
+                return (
+                    <FormControl className={classes.formItemSelect}>
+                        <InputLabel id="demo-simple-select-label">{selectOptionLabel}</InputLabel>
+                        <Select
+                            labelId={label}
+
+                            id={id}
+                            value={value}
+                            onChange={this.handleFieldOnChange}
+                        >
+                            {
+                                options.map((option) => (
+                                    <MenuItem
+                                        id={`${id}-${option.name}`}
+                                        key={`${id}-${option.name}`}
+                                        value={option.value}
+                                    >
+                                        {option.label}
+                                    </MenuItem>
+                                ))
+                            }
+                        </Select>
+                    </FormControl>
+                );
+            case formTypes.TEXT:
+            default:
+                return (
+                    <TextField
+                        id={id}
+                        label={label}
+                        name={name}
+                        onChange={this.handleFieldOnChange}
+                        type="text"
+                        value={value}
+                        variant="outlined"
+                    />
+                );
+        }
+    }
+
+    renderForm() {
+        const { classes, form } = this.props;
+
+        return form.map((item, index) => (
+            <Grid
+                item
+                className={classes.formItem}
+                key={`${item.name}-${index}`}
+                lg={12}
+                sm={12}
+                xs={12}
+            >
+                {this.renderFormItem(item)}
+            </Grid>
+        ));
+    }
+
+    render() {
+        return this.renderForm();
+    }
+}
+
+CtrlDynamicForm.propTypes = {
+    classes: PropTypes.object.isRequired,
+    form: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        validations: PropTypes.arrayOf(PropTypes.string).isRequired
+    })).isRequired
+};
+
+export default withStyles(styles)(CtrlDynamicForm);

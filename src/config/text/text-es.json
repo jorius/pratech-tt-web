@@ -2,6 +2,19 @@
     "app": {
         "title": "Pratech"
     },
+    "dynamicForm": {
+        "bogota": "Bogotá",
+        "female": "Femenino",
+        "genre": "Género",
+        "male": "Masculino",
+        "medellin": "Medellín",
+        "password": "Contraseña",
+        "records": "Registros",
+        "rememberMe": "Recordarme",
+        "selectCity": "Seleccione una ciudad",
+        "title": "Formulario dinámico",
+        "username": "Nombre de usuario"
+    },
     "homePage": {
         "title": "Página de Inicio"
     },

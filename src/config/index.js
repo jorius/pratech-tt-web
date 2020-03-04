@@ -1,4 +1,5 @@
 // @json
+import dynamicForm from './data/dynamic-form.json';
 import globals from './settings/globals.json';
 import initialState from './state/initial-state.json';
 import mainMenu from './menu/main-menu.json';
@@ -58,6 +59,7 @@ const getConfiguration = () => {
 
     const config = {
         applyLanguage,
+        dynamicForm,
         initialState,
         mockData,
         routes,

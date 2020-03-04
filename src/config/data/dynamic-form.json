@@ -1,0 +1,35 @@
+[
+    {
+        "id": "username",
+        "name": "username",
+        "type": "text",
+        "validations": ["required"]
+    },
+    {
+        "id": "password",
+        "name": "password",
+        "type": "password",
+        "validations": ["required"]
+    },
+    {
+        "id": "rememberMe",
+        "name": "rememberMe",
+        "type": "checkbox",
+        "validations": []
+    },
+    {
+        "id": "genre",
+        "name": "genre",
+        "options": ["male", "female"],
+        "type": "radio",
+        "validations": []
+    },
+    {
+        "id": "cities",
+        "selectOptionLabel": "selectCity",
+        "name": "cities",
+        "options": ["medellin", "bogota"],
+        "type": "select",
+        "validations": []
+    }
+]
