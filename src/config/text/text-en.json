@@ -2,8 +2,9 @@
     "app": {
         "title": "Pratech"
     },
-    "dynamicForm": {
+    "dynamicFormPage": {
         "bogota": "Bogotá",
+        "cancel": "Cancelar",
         "female": "Female",
         "genre": "Genre",
         "male": "Male",
@@ -11,11 +12,15 @@
         "password": "Password",
         "records": "Records",
         "rememberMe": "Remember me",
+        "save": "Guardar",
         "selectCity": "Select a city",
-        "title": "Dynamic form",
+        "title": "Dynamic forms",
         "username": "Username"
     },
     "homePage": {
+        "howToUseDynamicForms": "How to use dynamic forms",
+        "selectLang": "Select a language:",
+        "startUsingDynamicForms": "Start using dynamic forms!",
         "title": "Home Page"
     },
     "loginPage": {
