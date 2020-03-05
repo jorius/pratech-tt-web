@@ -6,6 +6,12 @@
         "url": "/404"
     },
     {
+        "component": "DynamicFormPageContainer",
+        "name": "dynamicForm",
+        "permission": "Content.DynamicForms",
+        "url": "/dynamic-forms"
+    },
+    {
         "component": "HomePageContainer",
         "name": "home",
         "permission": "Content.HomePage",
