@@ -2,6 +2,7 @@
 import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -74,48 +75,56 @@ class LoginPage extends PureComponent {
                 role="presentation"
             >
                 <div className={classes.loginPageContent}>
-                    <Grid
-                        alignItems="center"
-                        container
-                        className={classes.loginPageForm}
-                        direction="column"
-                        justify="center"
-                    >
-                        <Grid className={classes.loginpageItem} item>
-                            <Typography variant="h4">{config.text.app.title}</Typography>
+                    <Paper elevation={3}>
+                        <Grid
+                            alignItems="center"
+                            container
+                            className={classes.loginPageForm}
+                            direction="column"
+                            justify="center"
+                        >
+                            <Grid className={classes.loginpageItem} item>
+                                <Typography variant="h4">{config.text.app.title}</Typography>
+                            </Grid>
+                            <Grid className={classes.loginPageItem} item>
+                                <TextField
+                                    id="username"
+                                    label={config.text.loginPage.username}
+                                    name="username"
+                                    onChange={this.handleOnFieldChange}
+                                    value={username}
+                                    variant="outlined"
+                                />
+                            </Grid>
+                            <Grid className={classes.loginPageItem} item>
+                                <TextField
+                                    id="password"
+                                    label={config.text.loginPage.password}
+                                    name="password"
+                                    onChange={this.handleOnFieldChange}
+                                    type="password"
+                                    value={password}
+                                    variant="outlined"
+                                />
+                            </Grid>
+                            <Grid className={classes.loginPageItem} item>
+                                <Button
+                                    color="primary"
+                                    onClick={this.handleOnUserLogin}
+                                    variant="contained"
+                                >
+                                    {config.text.loginPage.title}
+                                </Button>
+                            </Grid>
                         </Grid>
-                        <Grid className={classes.loginPageItem} item>
-                            <TextField
-                                id="username"
-                                label={config.text.loginPage.username}
-                                name="username"
-                                onChange={this.handleOnFieldChange}
-                                value={username}
-                                variant="outlined"
-                            />
-                        </Grid>
-                        <Grid className={classes.loginPageItem} item>
-                            <TextField
-                                id="password"
-                                label={config.text.loginPage.password}
-                                name="password"
-                                onChange={this.handleOnFieldChange}
-                                type="password"
-                                value={password}
-                                variant="outlined"
-                            />
-                        </Grid>
-                        <Grid className={classes.loginPageItem} item>
-                            <Button color="primary" onClick={this.handleOnUserLogin} variant="contained">Log In</Button>
-                        </Grid>
-                    </Grid>
+                    </Paper>
                 </div>
                 <Snackbar
                     autoHideDuration={5000}
                     onClose={() => { this.setState({ showMsg: false, msg: '' }); }}
                     open={showMsg}
                 >
-                    <Alert severity={msgType}>{msg}</Alert>
+                    <Alert severity={msgType} variant="filled">{msg}</Alert>
                 </Snackbar>
             </div>
         );

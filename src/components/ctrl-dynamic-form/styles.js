@@ -1,4 +1,7 @@
 export default () => ({
+    cancelButton: {
+        marginLeft: 10
+    },
     formItem: {
         padding: 10
     },

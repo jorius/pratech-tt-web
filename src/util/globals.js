@@ -36,3 +36,10 @@ export const navigateToUrl = (url) => {
 export const getWindowInnerWidth = () =>
     window.innerWidth;
 
+/**
+ * Open a url in a new tab
+ */
+export const openNewTab = (url) => {
+    const tab = window.open(url, '_blank');
+    tab.focus();
+};

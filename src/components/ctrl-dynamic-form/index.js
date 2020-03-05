@@ -1,4 +1,5 @@
 // @packages
+import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -175,18 +176,46 @@ class CtrlDynamicForm extends PureComponent {
     }
 
     render() {
-        return this.renderForm();
+        const {
+            cancelButtonLabel,
+            classes,
+            saveButtonLabel
+        } = this.props;
+
+        return (
+            <Grid container direction="column">
+                {this.renderForm()}
+                <Grid
+                    className={classes.formItem}
+                    item
+                    lg={12}
+                    sm={12}
+                    xs={12}
+                >
+                    <Button color="primary" variant="contained">{saveButtonLabel}</Button>
+                    <Button
+                        className={classes.cancelButton}
+                        color="secondary"
+                        variant="contained"
+                    >
+                        {cancelButtonLabel}
+                    </Button>
+                </Grid>
+            </Grid>
+        );
     }
 }
 
 CtrlDynamicForm.propTypes = {
+    cancelButtonLabel: PropTypes.string.isRequired,
     classes: PropTypes.object.isRequired,
     form: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
         validations: PropTypes.arrayOf(PropTypes.string).isRequired
-    })).isRequired
+    })).isRequired,
+    saveButtonLabel: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(CtrlDynamicForm);

@@ -1,72 +1,88 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+
 // @packages
 import Grid from '@material-ui/core/Grid';
+import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/styles';
 
 // @scripts
-import CtrlDynamicForm from '../../components/ctrl-dynamic-form';
 import { config } from '../../config';
+import { navigateToUrl, openNewTab } from '../../util';
 
 // @styles
 import styles from './styles';
 
-const HomePage = ({ classes }) => {
-    const buildForm = () =>
-        config.dynamicForm.map((formItem) => ({
-            ...formItem,
-            label: config.text.dynamicForm[formItem.name],
-            options: formItem.options && formItem.options.length
-                ? formItem.options.map((option) =>
-                    ({
-                        name: option,
-                        label: config.text.dynamicForm[option],
-                        value: option
-                    }))
-                : [],
-            selectOptionLabel: formItem.selectOptionLabel
-                ? config.text.dynamicForm[formItem.selectOptionLabel]
-                : null
-        }));
+// @images
+import en from '../../styles/images/en.png';
+import es from '../../styles/images/es.png';
+import logo from '../../styles/images/logo.png';
 
-    return (
-        <div className={classes.homePageContainer}>
+const HomePage = ({
+    classes,
+    onUserChangeLangCode,
+    userLanguageCode
+}) => (
+    <div className={classes.homePageContainer}>
+        <img alt="logo" src={logo} />
+        <Grid container>
             <Grid
-                alignContent="center"
-                alignItems="center"
-                container
-                direction="row"
-                justify="center"
+                className={classes.homePageItem}
+                item
+                lg={4}
+                sm={12}
+                xs={12}
             >
-                <Grid
-                    item
-                    lg={6}
-                    sm={6}
-                    xs={12}
-                >
-                    <Typography variant="h3">{config.text.dynamicForm.title}</Typography>
-                    <CtrlDynamicForm form={buildForm()} />
-                </Grid>
-                <Grid
-                    item
-                    lg={6}
-                    sm={6}
-                    xs={12}
-                >
-                    <Typography variant="h3">{config.text.dynamicForm.records}</Typography>
-                    <CtrlDynamicForm form={buildForm()} />
-                    {/* TODO: I should place the table with the saved records here! */}
-                </Grid>
+                <Paper className={classes.homePagePaper} elevation={3}>
+                    <Typography variant="h6">
+                        {config.text.homePage.selectLang}
+                    </Typography>
+                    <div className={classes.langImages}>
+                        <img
+                            alt="en"
+                            className={classes.marginRight}
+                            onClick={() => onUserChangeLangCode('en')}
+                            src={en}
+                            style={{ cursor: 'pointer', width: 32 }}
+                        />
+                        <img
+                            alt="es"
+                            onClick={() => onUserChangeLangCode('es')}
+                            src={es}
+                            style={{ cursor: 'pointer', width: 32 }}
+                        />
+                    </div>
+                    <Typography>
+                        <Link
+                            color="primary"
+                            onClick={() => {
+                                openNewTab(`https://github.com/jorius/pratech-tt-web/blob/playground/README-${userLanguageCode}.md`);
+                            }}
+                        >
+                            {`1. ${config.text.homePage.howToUseDynamicForms}`}
+                        </Link>
+                    </Typography>
+                    <Typography>
+                        <Link color="primary" onClick={() => navigateToUrl('dynamic-forms')}>
+                            {`2. ${config.text.homePage.startUsingDynamicForms}`}
+                        </Link>
+                    </Typography>
+                </Paper>
             </Grid>
-        </div>
-    );
-};
+        </Grid>
+    </div>
+);
+
 
 HomePage.propTypes = {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    onUserChangeLangCode: PropTypes.func.isRequired,
+    userLanguageCode: PropTypes.string.isRequired
 };
-
-HomePage.defaultProps = {};
 
 export default withStyles(styles)(HomePage);
