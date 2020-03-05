@@ -3,8 +3,8 @@
         "version": "1.0.0"
     },
     "user": {
-        "isLoggedIn": true,
-        "languageCode": "es",
-        "permissions": ["Pratech.Admin", "Content.HomePage"]
+        "isLoggedIn": false,
+        "languageCode": "en",
+        "permissions": []
     }
 }
