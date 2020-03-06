@@ -4,7 +4,8 @@
     },
     "dynamicFormPage": {
         "bogota": "Bogotá",
-        "cancel": "Cancel",
+        "cancel": "Cancelar",
+        "date": "Fecha",
         "female": "Femenino",
         "genre": "Género",
         "male": "Masculino",
@@ -12,7 +13,7 @@
         "password": "Contraseña",
         "records": "Registros",
         "rememberMe": "Recordarme",
-        "save": "Save",
+        "save": "Guardar",
         "selectCity": "Seleccione una ciudad",
         "title": "Formularios dinámicos",
         "username": "Nombre de usuario"
