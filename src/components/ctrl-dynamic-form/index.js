@@ -6,12 +6,15 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import MomentUtils from '@date-io/moment';
 import PropTypes from 'prop-types';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import React, { PureComponent } from 'react';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
+import moment from 'moment';
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { withStyles } from '@material-ui/styles';
 
 // @styles
@@ -20,6 +23,7 @@ import styles from './styles';
 // @constants
 const formTypes = {
     CHECKBOX: 'checkbox',
+    DATE: 'date',
     PASSWORD: 'password',
     RADIO: 'radio',
     SELECT: 'select',
@@ -32,6 +36,7 @@ class CtrlDynamicForm extends PureComponent {
         this.state = {};
         this.buildState = this.buildState.bind(this);
         this.renderForm = this.renderForm.bind(this);
+        this.handleDateFieldOnChange = this.handleDateFieldOnChange.bind(this);
         this.handleFieldOnChange = this.handleFieldOnChange.bind(this);
         this.renderFormItem = this.renderFormItem.bind(this);
     }
@@ -44,7 +49,7 @@ class CtrlDynamicForm extends PureComponent {
         const { form } = this.props;
 
         form.forEach(({ name }) => {
-            this.setState({ [name]: '' });
+            this.setState({ [name]: null });
         });
     }
 
@@ -57,7 +62,12 @@ class CtrlDynamicForm extends PureComponent {
         this.setState({ [name]: value });
     }
 
+    handleDateFieldOnChange(date, name) {
+        this.setState({ [name]: date });
+    }
+
     renderFormItem({
+        format,
         id,
         label,
         name,
@@ -66,6 +76,7 @@ class CtrlDynamicForm extends PureComponent {
         type
     }) {
         const { classes } = this.props;
+
         // eslint-disable-next-line react/destructuring-assignment
         const value = this.state[name];
 
@@ -83,6 +94,23 @@ class CtrlDynamicForm extends PureComponent {
                         )}
                         label={label}
                     />
+                );
+            case formTypes.DATE:
+                return (
+                    <MuiPickersUtilsProvider utils={MomentUtils}>
+                        <KeyboardDatePicker
+                            KeyboardButtonProps={{ 'aria-label': name }}
+                            disableToolbar
+                            format={format}
+                            id={id}
+                            label={label}
+                            margin="normal"
+                            name={name}
+                            onChange={(date) => this.handleDateFieldOnChange(date, name)}
+                            value={value}
+                            variant="inline"
+                        />
+                    </MuiPickersUtilsProvider>
                 );
             case formTypes.PASSWORD:
                 return (
