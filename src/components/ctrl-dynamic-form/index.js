@@ -13,7 +13,6 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import React, { PureComponent } from 'react';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
-import moment from 'moment';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { withStyles } from '@material-ui/styles';
 
