@@ -31,5 +31,12 @@
         "options": ["medellin", "bogota"],
         "type": "select",
         "validations": []
+    },
+    {
+        "format": "DD/MM/YYYY",
+        "id": "date",
+        "name": "date",
+        "type": "date",
+        "validations": []
     }
 ]
