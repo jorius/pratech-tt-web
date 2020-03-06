@@ -3,34 +3,6 @@
         "email": "admin@pratech.com",
         "name": "Pratech Admin",
         "authToken": "91AE2B60-A22E-43BA-B550-5D459A6A5F92",
-        "permissions": ["Pratech.Admin", "Content.HomePage"]
-    },
-    "shopCategories": [{
-        "name": "skirts",
-        "stockQuantity": 947
-    },
-    {
-        "name": "jumpsuits&Rompers",
-        "stockQuantity": 810
-    },
-    {
-        "name": "sleepwear",
-        "stockQuantity": 747
-    },
-    {
-        "name": "socks",
-        "stockQuantity": 408
-    },
-    {
-        "name": "suits",
-        "stockQuantity": 62
-    }],
-    "storeBrands": [
-        { "name": "Versace" },
-        { "name": "Adidas" },
-        { "name": "Nike" },
-        { "name": "Gucci"},
-        { "name": "ALO" },
-        { "name": "Alex Evenings" }
-    ]
+        "permissions": ["Pratech.Admin", "Content.HomePage", "Content.DynamicForms"]
+    }
 }
