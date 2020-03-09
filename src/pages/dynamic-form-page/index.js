@@ -34,6 +34,10 @@ const DynamicFormPage = ({ classes }) => {
                 : null
         }));
 
+    const handleOnSave = (formData) => {
+        alert('ok');
+    };
+
     return (
         <div className={classes.dynamicFormPageContainer}>
             <img alt="logo" src={logo} />
@@ -59,9 +63,10 @@ const DynamicFormPage = ({ classes }) => {
                             {config.text.dynamicFormPage.title}
                         </Typography>
                         <CtrlDynamicForm
-                            form={buildForm()}
-                            saveButtonLabel={config.text.dynamicFormPage.save}
                             cancelButtonLabel={config.text.dynamicFormPage.cancel}
+                            form={buildForm()}
+                            onSave={handleOnSave}
+                            saveButtonLabel={config.text.dynamicFormPage.save}
                         />
                     </Paper>
                 </Grid>

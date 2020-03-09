@@ -16,27 +16,26 @@ import TextField from '@material-ui/core/TextField';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { withStyles } from '@material-ui/styles';
 
+// @cripts
+import {
+    checkValidations,
+    formTypes,
+    setInitialValueByType,
+    validationTypes
+} from './util';
+
 // @styles
 import styles from './styles';
-
-// @constants
-const formTypes = {
-    CHECKBOX: 'checkbox',
-    DATE: 'date',
-    PASSWORD: 'password',
-    RADIO: 'radio',
-    SELECT: 'select',
-    TEXT: 'text'
-};
 
 class CtrlDynamicForm extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {};
         this.buildState = this.buildState.bind(this);
-        this.renderForm = this.renderForm.bind(this);
         this.handleDateFieldOnChange = this.handleDateFieldOnChange.bind(this);
         this.handleFieldOnChange = this.handleFieldOnChange.bind(this);
+        this.handleOnFormSave = this.handleOnFormSave.bind(this);
+        this.renderForm = this.renderForm.bind(this);
         this.renderFormItem = this.renderFormItem.bind(this);
     }
 
@@ -47,9 +46,34 @@ class CtrlDynamicForm extends PureComponent {
     buildState() {
         const { form } = this.props;
 
-        form.forEach(({ name }) => {
-            this.setState({ [name]: null });
+        form.forEach(({
+            name,
+            type,
+            validations
+        }) => {
+            this.setState({
+                [name]: {
+                    isValid: false,
+                    validations,
+                    value: setInitialValueByType(type)
+                }
+            });
         });
+    }
+
+    handleOnFormSave() {
+        const { state } = this;
+        const { onSave } = this.props;
+        const formData = Object.keys(state).map(key => checkValidations(state[key], key));
+
+        const isFormValid = formData.every(({ isValid }) => isValid);
+
+        if (isFormValid) {
+            onSave(formData);
+            return;
+        }
+
+        alert('error');
     }
 
     handleFieldOnChange({ target }) {
@@ -58,7 +82,12 @@ class CtrlDynamicForm extends PureComponent {
             value
         } = target;
 
-        this.setState({ [name]: value });
+        this.setState((prevState) => ({
+            [name]: {
+                ...prevState[name],
+                value
+            }
+        }));
     }
 
     handleDateFieldOnChange(date, name) {
@@ -77,7 +106,7 @@ class CtrlDynamicForm extends PureComponent {
         const { classes } = this.props;
 
         // eslint-disable-next-line react/destructuring-assignment
-        const value = this.state[name];
+        const { value } = this.state[name] || {};
 
         switch (type) {
             case formTypes.CHECKBOX:
@@ -147,13 +176,13 @@ class CtrlDynamicForm extends PureComponent {
             case formTypes.SELECT:
                 return (
                     <FormControl className={classes.formItemSelect}>
-                        <InputLabel id="demo-simple-select-label">{selectOptionLabel}</InputLabel>
+                        <InputLabel id={`${id}-select-option-label`}>{selectOptionLabel}</InputLabel>
                         <Select
-                            labelId={label}
-
                             id={id}
-                            value={value}
+                            labelId={label}
+                            name={name}
                             onChange={this.handleFieldOnChange}
+                            value={value}
                         >
                             {
                                 options.map((option) => (
@@ -219,7 +248,13 @@ class CtrlDynamicForm extends PureComponent {
                     sm={12}
                     xs={12}
                 >
-                    <Button color="primary" variant="contained">{saveButtonLabel}</Button>
+                    <Button
+                        color="primary"
+                        onClick={this.handleOnFormSave}
+                        variant="contained"
+                    >
+                        {saveButtonLabel}
+                    </Button>
                     <Button
                         className={classes.cancelButton}
                         color="secondary"
@@ -242,6 +277,7 @@ CtrlDynamicForm.propTypes = {
         type: PropTypes.string.isRequired,
         validations: PropTypes.arrayOf(PropTypes.string).isRequired
     })).isRequired,
+    onSave: PropTypes.func.isRequired,
     saveButtonLabel: PropTypes.string.isRequired
 };
 
