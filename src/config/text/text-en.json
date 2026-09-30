@@ -1,0 +1,44 @@
+{
+    "app": {
+        "title": "Pratech"
+    },
+    "dynamicFormPage": {
+        "bogota": "Bogotá",
+        "cancel": "Cancel",
+        "date": "Date",
+        "female": "Female",
+        "genre": "Genre",
+        "male": "Male",
+        "medellin": "Medellín",
+        "password": "Password",
+        "records": "Records",
+        "rememberMe": "Remember me",
+        "save": "Save",
+        "selectCity": "Select a city",
+        "title": "Dynamic forms",
+        "username": "Username"
+    },
+    "homePage": {
+        "howToUseDynamicForms": "How to use dynamic forms",
+        "selectLang": "Select a language:",
+        "startUsingDynamicForms": "Start using dynamic forms!",
+        "title": "Home Page"
+    },
+    "loginPage": {
+        "error": "Wrong username or password",
+        "password": "Password",
+        "required": "Username and password are required",
+        "success": "You will be redirected in a moment",
+        "title": "Log In",
+        "username": "Username"
+    },
+    "masterPage": {
+        "title": "Master Page"
+    },
+    "notFoundPage": {
+        "title": "404 Page not found!"
+    },
+    "settingsPage": {
+        "title": "Settings Page"
+    }
+}

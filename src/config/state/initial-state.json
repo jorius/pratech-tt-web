@@ -1,0 +1,10 @@
+{
+    "appInfo": {
+        "version": "1.0.0"
+    },
+    "user": {
+        "isLoggedIn": false,
+        "languageCode": "en",
+        "permissions": []
+    }
+}

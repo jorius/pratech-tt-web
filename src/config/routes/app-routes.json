@@ -1,0 +1,32 @@
+[
+    {
+        "component": "NotFoundPageContainer",
+        "name": "404",
+        "permission": "none",
+        "url": "/404"
+    },
+    {
+        "component": "DynamicFormPageContainer",
+        "name": "dynamicForm",
+        "permission": "Content.DynamicForms",
+        "url": "/dynamic-forms"
+    },
+    {
+        "component": "HomePageContainer",
+        "name": "home",
+        "permission": "Content.HomePage",
+        "url": "/"
+    },
+    {
+        "component": "LoginPageContainer",
+        "name": "login",
+        "permission": "none",
+        "url": "/login"
+    },
+    {
+        "component": "SettingsPageContainer",
+        "name": "settings",
+        "permission": "Content.SettingsPage",
+        "url": "/settings"
+    }
+]
