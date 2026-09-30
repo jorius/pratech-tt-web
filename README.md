@@ -2,7 +2,7 @@
 
 **Live:** https://jorius.github.io/pratech-tt-web/ — GitHub Pages build with the service mocker on; log in with the credentials listed under "Explore and discover the project".
 
-A React app that renders a form dynamically from a JSON schema (`src/config/data/dynamic-form.json`) with per-field validations, a mocked login and English/Spanish text. Written in March 2020 as a technical test and published unchanged in 2026.
+A React app that renders a form dynamically from a JSON schema (`src/config/data/dynamic-form.json`) with per-field validations, a mocked login and English/Spanish text. Written in March 2020 as a technical test and published on GitHub Pages in 2026 with one fix: in-app navigation now keeps the site's sub-path.
 
 # Prerequisites
 

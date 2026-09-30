@@ -19,7 +19,7 @@ export const encodeBase64String = (str) =>
  * @returns {string}
  */
 export const getBaseUrl = () =>
-    window.location.origin;
+    `${window.location.origin}${window.location.pathname.replace(/\/$/, '')}`;
 
 /**
  * Navigates to the given Url.
